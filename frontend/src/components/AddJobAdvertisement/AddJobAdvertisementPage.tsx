@@ -40,6 +40,7 @@ const AddJobAdvertisementPage = () => {
       if (response.ok) {
         toast.success("Zaposlitveni oglas uspešno ustvarjen!");
         router.push(`/podjetje/${session?.user.company.slug}`);
+        router.refresh();
       } else {
         toast.error("Oglasa za delo ni bilo mogoče ustvariti!");
       }

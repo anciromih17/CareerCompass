@@ -5,7 +5,10 @@
   "scripts": {
     "test:e2e": "node e2e/run.mjs",
     "test:e2e:report": "playwright show-report",
-    "test:e2e:list": "playwright test --list"
+    "test:e2e:list": "playwright test --list",
+    "db:up": "docker compose up -d --wait mongodb",
+    "db:down": "docker compose stop mongodb",
+    "test:e2e:docker": "docker compose --profile tests run --build --rm functional-tests"
   },
   "engines": {
     "node": ">=22"
@@ -13,7 +16,6 @@
   "devDependencies": {
     "@playwright/test": "1.65.0",
     "firebase-tools": "15.35.0",
-    "mongodb": "7.8.0",
-    "mongodb-memory-server": "11.3.0"
+    "mongodb": "7.8.0"
   }
 }

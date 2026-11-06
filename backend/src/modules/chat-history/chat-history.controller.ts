@@ -9,7 +9,7 @@ import { ChatHistoryService } from './chat-history.service';
 import { CreateUpdateChatHistoryDto } from './dto/create-update-chat-history.dto';
 import { ChatHistory } from '../../db/entities/chat-history.model';
 import { GetChatHistoryByUserDto } from './dto/chat-history-user.dto';
-import { SuccessResponse } from 'src/shared/data.response';
+import { SuccessResponse } from '../../shared/data.response';
 
 @Controller('/history')
 export class ChatHistoryController {

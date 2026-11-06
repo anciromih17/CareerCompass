@@ -67,7 +67,7 @@ type World = {
 export const test = base.extend<{ world: World }>({
   world: async ({ page }, use, testInfo) => {
     const uri = process.env.E2E_MONGO_URI;
-    if (process.env.E2E_MANAGED !== '1' || !uri?.match(/^mongodb:\/\/127\.0\.0\.1:\d+\/careercompass_e2e\b/)) {
+    if (process.env.E2E_MANAGED !== '1' || !['mongodb://127.0.0.1:47017/careercompass_e2e', ...(process.env.E2E_IN_CONTAINER === '1' ? ['mongodb://mongodb:27017/careercompass_e2e'] : [])].includes(uri ?? '')) {
       throw new Error('Run npm run test:e2e; refusing to reset an unmanaged database.');
     }
     const client = await MongoClient.connect(uri);

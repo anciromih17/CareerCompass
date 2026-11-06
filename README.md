@@ -133,3 +133,15 @@ npm run build
 ```
 
 in `frontend` directory to build the client
+
+## Avtomatizirano funkcionalno testiranje produkcijske gradnje
+
+MongoDB teče lokalno v Dockerju. Zaganjalnik zgradi NestJS in Next.js ter uporabi `next start`.
+
+```bash
+npm run test:e2e
+# Ali vse storitve in brskalnik v Dockerju:
+docker compose --profile tests run --build --rm functional-tests
+```
+
+Namestitev, poročila, nastavitve in omejitev preverjanja e-pošte so opisani v [poročilu 4. naloge](documentation/AVTOMATIZACIJA_FUNKCIONALNEGA_TESTIRANJA.md).

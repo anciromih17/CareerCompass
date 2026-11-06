@@ -178,19 +178,7 @@ test('TP-05 – Objava enega oglasa, pravilne podrobnosti in trajnost', async ({
     }
     await page.getByRole('button', { name: 'Dodaj oglas', exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`/podjetje/${company.slug}$`));
-    const createdHeading = page.getByRole('heading', { name: 'TP05 Razvijalec', exact: true });
-    await expect.soft(createdHeading, 'BUG-01: novi oglas mora biti viden takoj po oddaji').toHaveCount(1);
-    if (await createdHeading.count() !== 1) {
-      await test.step('Diagnostika BUG-01: dodatna osvežitev; test ostane neuspešen', async () => {
-        await test.info().attach('BUG-01-before-refresh', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
-        const stored = await world.db.collection('jobadvertisements').find({ ...query, position: 'TP05 Razvijalec' }).toArray();
-        await test.info().attach('BUG-01-database', { body: JSON.stringify(stored, null, 2), contentType: 'application/json' });
-        expect(stored).toHaveLength(1);
-        await page.reload();
-        await expect(createdHeading).toHaveCount(1);
-        await test.info().attach('BUG-01-after-refresh', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
-      });
-    }
+    await expect(page.getByRole('heading', { name: 'TP05 Razvijalec', exact: true })).toHaveCount(1);
   });
   await test.step('5: Odpri oglas in preveri vse podatke ter povezano podjetje', async () => {
     await page.getByRole('heading', { name: 'TP05 Razvijalec', exact: true }).click();

@@ -1,0 +1,30 @@
+name: careercompass-testing
+services:
+  mongodb:
+    image: mongo:7.0.14
+    ports:
+      - "127.0.0.1:47017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "quit(db.adminCommand({ping:1}).ok ? 0 : 1)"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  functional-tests:
+    profiles: ["tests"]
+    build:
+      context: .
+      dockerfile: Dockerfile.e2e
+    init: true
+    environment:
+      E2E_IN_CONTAINER: "1"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
+      - ./e2e/.runtime:/app/e2e/.runtime
+volumes:
+  mongo-data:
