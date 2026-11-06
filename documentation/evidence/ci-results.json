@@ -1,0 +1,13 @@
+{
+  "commit": "cbb6fbeaaaaefa6a1581ff680055de79ad16ce77",
+  "run": "https://github.com/anciromih17/CareerCompass/actions/runs/42276444645",
+  "jobId": 128093873276,
+  "environment": "Ubuntu 22.04, Node.js 22, Chromium",
+  "passed": 4,
+  "failed": 1,
+  "skipped": 0,
+  "failure": "TP-05: BUG-01, novi oglas ni viden takoj po oddaji",
+  "artifactId": 13532734086,
+  "artifactExpiresAt": "2026-11-20T19:10:01Z",
+  "evidenceSource": "GitHub Actions job log and artifacts API"
+}

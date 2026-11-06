@@ -1,9 +1,9 @@
 # 4. naloga – Avtomatizacija funkcionalnega testiranja
 
-Projekt: **CareerCompass**, osebni repozitorij `anciromih17/CareerCompass`.  
-Podlaga: [pet funkcionalnih testnih primerov](CareerCompass_funkcionalni_testni_primeri.md), TP-01–TP-05.  
-Datum lokalne izvedbe: **6. 11. 2026**.  
-Začetna različica: `680bf90`; dodana testna infrastruktura in konfiguracija spodaj.  
+Projekt: **CareerCompass**, osebni repozitorij `anciromih17/CareerCompass`.
+Podlaga: [pet funkcionalnih testnih primerov](CareerCompass_funkcionalni_testni_primeri.md), TP-01–TP-05.
+Datum lokalne izvedbe: **6. 11. 2026**.
+Začetna različica: `680bf90`; dodana testna infrastruktura in konfiguracija spodaj.
 Avtor skript in osnutka poročila: **OpenAI Codex**. Človeški pregled skript in dopolnitve po 3. nalogi opravita avtorici pred oddajo; agent tega pregleda ne more potrditi v njunem imenu.
 
 ## 1. Izbira orodja
@@ -122,6 +122,14 @@ Postopek: checkout → Node.js 22 → `npm ci` za testna orodja, backend in fron
 Neuspešen test vrne neničelno izhodno kodo in označi job kot neuspešen. To je pravilen rezultat ob zaznani napaki aplikacije. V artefaktu so HTML, JSON, JUnit, video/sledi/slike neuspehov in dnevniški izpisi testnih storitev. Lokalne env datoteke niso del artefakta.
 
 Obstoječi SonarCloud job še vedno vsebuje prvotno organizacijo `mtoplak` in pričakuje njene nastavitve. Stara build opravila prav tako niso enaka novemu izoliranemu funkcionalnemu jobu. Že [izvedba pred dodajanjem avtomatizacije](https://github.com/anciromih17/CareerCompass/actions/runs/42271949942) je imela neuspešen Build frontend, uspešna Build backend in Backend unit testing ter preskočen SonarCloud. Njihov uspeh se ne sme enačiti z uspehom teh petih testov; njihova migracija ni bila predmet te naloge.
+
+### Preverjena izvedba na GitHub Actions
+
+Testna implementacija je objavljena v commitu **`cbb6fbe`** na `main`. [Izvedba cevovoda 42276444645](https://github.com/anciromih17/CareerCompass/actions/runs/42276444645) je 6. 11. 2026 tudi na svežem Linux okolju dejansko izvedla vseh pet testov: **4 uspešni, 1 neuspešen (TP-05, BUG-01), brez preskočenih testov**. Playwright je poročal 1,2 minute izvajanja testov. Namestitev, zagon izoliranih storitev in nalaganje artefakta so uspeli.
+
+[Artefakt functional-test-results](https://github.com/anciromih17/CareerCompass/actions/runs/42276444645/artifacts/13532734086) vsebuje HTML, JUnit, JSON, sledi, video in zaslonske slike. Izteče se **20. 11. 2026**; za kasnejšo oddajo ga pravočasno prenesi ali ponovno zaženi cevovod. Trajni lokalni dokazi so v `documentation/evidence`.
+
+Celoten cevovod je rdeč zaradi zaznane funkcionalne napake in ločeno zaradi starega opravila Build frontend. Pri slednjem dnevnik potrjuje `MongoParseError: Invalid scheme`, ker nima veljavne konfiguracije `MONGODB_URI`. Backend build in vseh 12 Jest testov sta uspešna; SonarCloud je preskočen. Napake gradnje ne pripisujemo novim funkcionalnim skriptam.
 
 ## 6. Rezultati lokalnega testiranja
 
