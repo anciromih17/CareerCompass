@@ -13,3 +13,10 @@
 **/dist/
 **/coverage/
 *.log
+
+# Automated test output
+/playwright-report/
+/test-results/
+/e2e/.runtime/
+/frontend/.next-e2e/
+firebase-debug.log

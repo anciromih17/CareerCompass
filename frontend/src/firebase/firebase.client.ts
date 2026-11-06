@@ -1,7 +1,7 @@
 import { stringToBlob } from "@/utils/convertImage";
 import { resizeImage } from "@/utils/resizeImage";
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
@@ -15,6 +15,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
+
+// Explicit local test configuration; normal Firebase behavior is unchanged.
+if (process.env.FIREBASE_AUTH_EMULATOR_HOST) {
+  const host = process.env.FIREBASE_AUTH_EMULATOR_HOST;
+  if (!/^(127\.0\.0\.1|localhost):\d+$/.test(host) ||
+      !process.env.FIREBASE_PROJECT_ID?.startsWith("demo-")) {
+    throw new Error("Auth emulator requires a loopback host and a demo project.");
+  }
+  connectAuthEmulator(getAuth(app), `http://${host}`, { disableWarnings: true });
+}
 
 export async function registerUser(email: string, password: string) {
   const auth = getAuth(app);

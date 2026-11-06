@@ -1,6 +1,7 @@
 name: CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -81,3 +82,40 @@ jobs:
             -Dsonar.organization=mtoplak
             -Dsonar.projectKey=mtoplak_CareerCompass
             -Dsonar.qualitygate.wait=false
+
+  functional_testing:
+    name: Functional tests (Playwright)
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            backend/package-lock.json
+            frontend/package-lock.json
+      - name: Install test tools and application dependencies
+        run: |
+          npm ci
+          npm ci --prefix backend
+          npm ci --prefix frontend
+      - name: Install Chromium and OS dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Run five functional test cases in isolated services
+        run: npm run test:e2e
+      - name: Save reports and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: functional-test-results
+          retention-days: 14
+          include-hidden-files: true
+          path: |
+            playwright-report/
+            test-results/
+            e2e/.runtime/*.log

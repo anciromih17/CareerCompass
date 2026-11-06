@@ -1,0 +1,19 @@
+{
+  "name": "careercompass-functional-tests",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test:e2e": "node e2e/run.mjs",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:list": "playwright test --list"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "firebase-tools": "15.35.0",
+    "mongodb": "7.8.0",
+    "mongodb-memory-server": "11.3.0"
+  }
+}

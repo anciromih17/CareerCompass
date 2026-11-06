@@ -1,0 +1,44 @@
+{
+  "run": {
+    "startTime": "2026-11-06T18:59:57.054Z",
+    "duration": 46117.483,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "TP-01 – Registracija, potrditev e-pošte in trajna prijava",
+      "status": "passed",
+      "durationMs": 6996,
+      "errors": []
+    },
+    {
+      "title": "TP-02 – Zavrnitev petmestnega gesla brez ustvarjenega računa",
+      "status": "passed",
+      "durationMs": 3054,
+      "errors": []
+    },
+    {
+      "title": "TP-03 – Kombinacija dejavnosti in vključujoče meje ocene 4",
+      "status": "passed",
+      "durationMs": 4673,
+      "errors": []
+    },
+    {
+      "title": "TP-04 – Prazni zadetki in ponastavitev iskanja zaposlitve",
+      "status": "passed",
+      "durationMs": 6670,
+      "errors": []
+    },
+    {
+      "title": "TP-05 – Objava enega oglasa, pravilne podrobnosti in trajnost",
+      "status": "failed",
+      "durationMs": 23874,
+      "errors": [
+        "Error: BUG-01: novi oglas mora biti viden takoj po oddaji"
+      ]
+    }
+  ]
+}
