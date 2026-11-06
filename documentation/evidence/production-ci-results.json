@@ -1,0 +1,18 @@
+{
+  "commit": "3653a94dc214c4d9a74c64caf02777491f2492ef",
+  "run": "https://github.com/anciromih17/CareerCompass/actions/runs/42281580953",
+  "environment": "Ubuntu 22.04, Node.js 22, Docker MongoDB 7.0.14, next build/next start",
+  "functionalTests": {
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 23.3
+  },
+  "backendUnitTests": {
+    "passed": 12,
+    "failed": 0
+  },
+  "sonarcloud": "skipped: repository configuration absent",
+  "artifactId": 13535592539,
+  "artifactExpiresAt": "2026-11-20T19:44:51Z"
+}

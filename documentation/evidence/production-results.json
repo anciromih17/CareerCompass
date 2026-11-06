@@ -1,0 +1,39 @@
+{
+  "commit": "3653a94",
+  "environment": "Docker: Node.js 22, production Next.js build/start, MongoDB 7.0.14",
+  "stats": {
+    "startTime": "2026-11-06T19:39:37.744Z",
+    "duration": 23548.888,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "TP-01 – Registracija, potrditev e-pošte in trajna prijava",
+      "status": "passed",
+      "durationMs": 4422
+    },
+    {
+      "title": "TP-02 – Zavrnitev petmestnega gesla brez ustvarjenega računa",
+      "status": "passed",
+      "durationMs": 2336
+    },
+    {
+      "title": "TP-03 – Kombinacija dejavnosti in vključujoče meje ocene 4",
+      "status": "passed",
+      "durationMs": 2461
+    },
+    {
+      "title": "TP-04 – Prazni zadetki in ponastavitev iskanja zaposlitve",
+      "status": "passed",
+      "durationMs": 3801
+    },
+    {
+      "title": "TP-05 – Objava enega oglasa, pravilne podrobnosti in trajnost",
+      "status": "passed",
+      "durationMs": 4236
+    }
+  ]
+}

@@ -113,7 +113,13 @@ Ob prvem prehodu na produkcijsko gradnjo z Docker MongoDB je bilo stanje ponovno
 
 Produkcijska gradnja je dodatno zahtevala generiranje Prisma odjemalca in nameščeno nativno vezavo bcrypt. Nastavitev baseUrl je odstranjena, edini odvisni uvoz je relativen. Backend izrecno vključuje tipe node in jest.
 
-Končni skupni rezultati po tej spremembi bodo zapisani v `documentation/evidence/production-results.json` in poročilu Playwright po dejanski izvedbi. Stari dokazi ne predstavljajo novega produkcijskega zagona.
+**Končni celotni Docker zagon: 5 uspešnih testov, 0 neuspešnih, 0 preskočenih; 23,5 sekunde izvajanja testov (brez gradnje).** Backend ima še 12 uspešnih Jest testov. [Strojni rezultat](evidence/production-results.json), [prikaz filtriranih podjetij](evidence/production-filter-results.png). Testna implementacija je v commitu `3653a94`. Stari dokazi ne predstavljajo novega produkcijskega zagona.
+
+### Potrjena produkcijska izvedba na GitHub Actions
+
+[Izvedba 42281580953](https://github.com/anciromih17/CareerCompass/actions/runs/42281580953) za commit `3653a94` je uspešna: **produkcijska gradnja in 5/5 funkcionalnih testov (23,3 s)** ter **backend gradnja in 12/12 Jest testov**. SonarCloud je pravilno preskočen, ker za ta repozitorij ni konfiguriran. Opravilo, ki je prej odpovedovalo zaradi manjkajoče zunanje MongoDB povezave, je nadomeščeno z dejansko gradnjo ob lokalnem Docker MongoDB.
+
+[Artefakt functional-test-results](https://github.com/anciromih17/CareerCompass/actions/runs/42281580953/artifacts/13535592539) je na voljo do 20. 11. 2026. Rezultat v `evidence/production-ci-results.json` je trajni povzetek te izvedbe. Po poteku artefakta ponovno zaženi cevovod ali uporabi pravočasno preneseno poročilo.
 
 ## 7. Pregled avtoric in uporaba UI
 
