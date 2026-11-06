@@ -1,0 +1,113 @@
+"use client";
+
+/* eslint-disable @next/next/no-img-element */
+
+import { IconUser } from "@/components/ui/icons";
+import { cn } from "@/lib/utils";
+import { spinner } from "./spinner";
+import { MemoizedReactMarkdown } from "../ChatBot/markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import { StreamableValue } from "ai/rsc";
+import { useStreamableText } from "@/lib/hooks/use-streamable-text";
+
+export function UserMessage({
+  children,
+}: {
+  readonly children: React.ReactNode;
+}) {
+  return (
+    <>
+      <div className="bg-background flex size-[25px] shrink-0 select-none items-center justify-center rounded-lg border shadow-sm">
+        <IconUser />
+      </div>
+      <div className="ml-4 flex-1 space-y-2 overflow-hidden pl-2">
+        {children}
+      </div>
+    </>
+  );
+}
+
+export function BotMessage({
+  content,
+  className,
+}: {
+  readonly content: string | StreamableValue<string>;
+  readonly className?: string;
+}) {
+  const text = useStreamableText(content);
+
+  return (
+    <div className={cn("group relative flex items-start md:-ml-12", className)}>
+      <div className="bg-background flex size-[25px] shrink-0 select-none items-center justify-center rounded-lg border shadow-sm">
+        <img className="size-6" src="/images/gemini.png" alt="gemini logo" />
+      </div>
+      <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
+        <MemoizedReactMarkdown
+          className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
+          remarkPlugins={[remarkGfm, remarkMath]}
+          components={{
+            p({ children }) {
+              return <p className="mb-2 last:mb-0">{children}</p>;
+            },
+            code({ node, className, children, ...props }) {
+              if (Array.isArray(children) && children.length) {
+                if (children[0] === "▍") {
+                  return (
+                    <span className="mt-1 animate-pulse cursor-default">▍</span>
+                  );
+                }
+
+                children[0] = (children[0] as string).replace("`▍`", "▍");
+              }
+
+              return (
+                <code className={className} {...props}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {text}
+        </MemoizedReactMarkdown>
+      </div>
+    </div>
+  );
+}
+
+export function BotCard({ children }: { readonly children: React.ReactNode }) {
+  return (
+    <>
+      <div className="bg-background flex size-[25px] shrink-0 select-none items-center justify-center rounded-lg border shadow-sm">
+        <img className="size-6" src="/images/gemini.png" alt="gemini logo" />
+      </div>
+      <div className="ml-4 flex-1 pl-2">{children}</div>
+    </>
+  );
+}
+
+export function SystemMessage({
+  children,
+}: {
+  readonly children: React.ReactNode;
+}) {
+  return (
+    <div className="mt-2 flex items-center justify-center gap-2 text-xs text-gray-500">
+      <div className={"max-w-[600px] flex-initial p-2"}>{children}</div>
+    </div>
+  );
+}
+
+export function SpinnerMessage() {
+  return (
+    <div className="group relative flex items-start md:-ml-12">
+      <div className="bg-background flex size-[25px] shrink-0 select-none items-center justify-center rounded-lg border shadow-sm">
+        <img className="size-6" src="/images/gemini.png" alt="gemini logo" />
+      </div>
+      <div className="ml-4 flex h-[24px] flex-1 flex-row items-center space-y-2 overflow-hidden px-1">
+        {spinner}
+      </div>
+    </div>
+  );
+}
